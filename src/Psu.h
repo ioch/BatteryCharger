@@ -6,8 +6,11 @@
 #define MODE_CC 0
 #define MODE_CV 1
 
+#define MIN_VOLTAGE 0
 #define MAX_VOLTAGE 16300
+#define MIN_CURRENT 50
 #define MAX_CURRENT 10150
+#define V_ERROR -240				// this have to be measured experimentaly
 
 typedef struct _PID {
     float P;

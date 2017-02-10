@@ -27,10 +27,10 @@ void Psu::setConstantCurrent(uint16_t current) {
 
 void Psu::servo(){
     uint16_t currentLSB = analogRead(isensePin);
-    current = map(currentLSB, 0, 1023, 0, MAX_CURRENT);//milliamps
+    current = map(currentLSB, 0, 1023, MIN_CURRENT, MAX_CURRENT);//milliamps
 
     uint16_t voltageLSB = analogRead(vsensePin);
-    voltage = map(voltageLSB, 0, 1023, 0, MAX_VOLTAGE);//millivolts
+    voltage = map(voltageLSB, 0, 1023, MIN_VOLTAGE, MAX_VOLTAGE) -V_ERROR;//millivolts
 
     if(MODE_CC == mode) {
         pidIteration((float) currentLSB / 1023.0, ipid);

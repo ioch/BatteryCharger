@@ -18,10 +18,13 @@ class LeadAcidCharger {
         LeadAcidCharger(Psu*, LiquidCrystal_I2C*);
         void run(void);
         void setBulkCurrent(uint16_t);
+        uint16_t getBulkCurrent();
         void startPrechargeState();
         void startBulkStage();
         void startAbsorptionStage();
         void startFloatStage();
+        void printState();
+        void updateMode();
         
     private:
         void checkBatteryConnected();
@@ -35,16 +38,16 @@ class LeadAcidCharger {
         int32_t avgVoltage = 0;
 
         //1.7V @ 25°C
-        uint16_t criticallyDischargedVoltage = 11700;
+        uint16_t criticallyDischargedVoltage = 11000; // original value 11700;
         //for 100AH battery
-        uint16_t bulkCurrent = 10000;
+        uint16_t bulkCurrent = 5000;
         uint16_t prechargeCurrent = bulkCurrent / 10;
         uint16_t bulkEndCurrent = bulkCurrent / 10;
 
-        //2.4V per cell
-        uint16_t absorptionVoltage = 14400;
-        //2.275V per cell
-        uint16_t floatVoltage = 13650;
+        //2.35V per cell
+        uint16_t absorptionVoltage = 14100;
+        //2.26V per cell
+        uint16_t floatVoltage = 13550;
 
         unsigned long stageStarted = 0;
         unsigned long lastControlTimestamp = 0;
